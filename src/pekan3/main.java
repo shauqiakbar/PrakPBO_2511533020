@@ -3,7 +3,6 @@ package pekan3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -36,7 +35,7 @@ public class main {
                     System.out.print("Masukkan Saldo Awal: ");
                     double saldo = input.nextDouble();
                     input.nextLine();
-                    System.out.print("Masukkan Pin: ");
+                    System.out.print("Masukkan Pin (6 digit): ");
                     String pin = input.nextLine();
 
                     akunAktif = new Rekening(no, nama, saldo, pin);
@@ -55,20 +54,20 @@ public class main {
                     break;
 
                 case 3:
-                	System.out.println("Masukkan PIN :");
-                	String pinYangDiinput = input.nextLine();
-                
-                	if (akunAktif.otentikasi(pinYangDiinput) == false) {
-                		System.out.println("Akses Ditolak: Pin yang anda masukkan salah!");
-                	} else {
-                	if (akunAktif == null) {
+                    if (akunAktif == null) {
                         System.out.println("Error: Anda belum membuka rekening!");
                     } else {
-                        System.out.print("Masukkan nominal tarik: ");
-                        double tarik = input.nextDouble();
-                        akunAktif.tarikTunai(tarik);
+                        System.out.print("Masukkan PIN: ");
+                        String pinYangDiinput = input.nextLine();
+
+                        if (akunAktif.otentikasi(pinYangDiinput)) {
+                            System.out.print("Masukkan nominal tarik: ");
+                            double tarik = input.nextDouble();
+                            akunAktif.tarikTunai(tarik);
+                        } else {
+                            System.out.println("Akses Ditolak: PIN yang Anda masukkan salah!");
+                        }
                     }
-                	}
                     break;
 
                 case 4:
@@ -100,25 +99,21 @@ public class main {
                         }
                     }
                     break;
-                    
+
                 case 6:
-                	
-                	System.out.println("Masukkan PIN :");
-                	String pinYangDiinput1 = input.nextLine();
-                	
-                	if (akunAktif.otentikasi(pinYangDiinput1) == false) {
-                		System.out.println("Akses Ditolak: Pin yang anda masukkan salah!");
-                	} else {
-                	
-                if (akunAktif == null) {
-                	System.out.println("Error: Anda belum membuka rekening!");
-                } else {
-                	akunAktif.cetakMutasi();
-                
-            }
-                	}
-                break;
-                	
+                    if (akunAktif == null) {
+                        System.out.println("Error: Anda belum membuka rekening!");
+                    } else {
+                        System.out.print("Masukkan PIN: ");
+                        String pinYangDiinput1 = input.nextLine();
+
+                        if (akunAktif.otentikasi(pinYangDiinput1)) {
+                            akunAktif.cetakMutasi();
+                        } else {
+                            System.out.println("Akses Ditolak: PIN yang Anda masukkan salah!");
+                        }
+                    }
+                    break;
 
                 case 0:
                     isRunning = false;
